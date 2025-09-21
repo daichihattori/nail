@@ -1,0 +1,28 @@
+[package]
+name = "bigint-rs"
+version = "0.1.0"
+edition = "2024"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "fat"
+panic = "abort"
+overflow-checks = false
+debug-assertions = false
+
+[profile.bench]
+opt-level = 3
+codegen-units = 1
+lto = "fat"
+overflow-checks = false
+debug-assertions = false
+
+[dependencies]
+num-bigint = "0.4"
+criterion = "0.5"
+rug = "1.24"
+
+[[bench]]
+name = "bigint_bench"
+harness = false
