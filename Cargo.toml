@@ -1,7 +1,16 @@
 [package]
 name = "bigint-rs"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "High-performance fixed-size big integer library with configurable limb count"
+documentation = "https://docs.rs/bigint-rs"
+homepage = "https://github.com/your-username/bigint-rs"
+repository = "https://github.com/your-username/bigint-rs"
+license = "MIT OR Apache-2.0"
+keywords = ["bigint", "arithmetic", "cryptography", "mathematics", "performance"]
+categories = ["algorithms", "mathematics", "no-std"]
+readme = "README.md"
 
 [profile.release]
 opt-level = 3
@@ -19,6 +28,9 @@ overflow-checks = false
 debug-assertions = false
 
 [dependencies]
+# No runtime dependencies - this is a zero-dependency library
+
+[dev-dependencies]
 num-bigint = "0.4"
 criterion = "0.5"
 rug = "1.24"
@@ -26,5 +38,21 @@ malachite = "0.4"
 
 
 [[bench]]
-name = "bigint_bench"
+name = "bigint_rs_bench"
+harness = false
+
+[[bench]]
+name = "num_bigint_bench"
+harness = false
+
+[[bench]]
+name = "rug_bench"
+harness = false
+
+[[bench]]
+name = "malachite_bench"
+harness = false
+
+[[bench]]
+name = "comparison_all"
 harness = false

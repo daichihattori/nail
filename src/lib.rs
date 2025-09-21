@@ -1,193 +1,61 @@
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub struct Uint<const LIMBS: usize> {
-    pub limbs: [u64; LIMBS],
-}
+//! # BigInt-RS
+//! 
+//! A high-performance fixed-size big integer library for Rust with configurable limb count.
+//! 
+//! This library provides compile-time sized unsigned integers with efficient arithmetic operations.
+//! Unlike dynamic big integer libraries, `bigint-rs` uses fixed-size arrays for predictable
+//! memory usage and optimal performance.
+//! 
+//! ## Features
+//! 
+//! - **Compile-time sizing**: `Uint<N>` where N is the number of 64-bit limbs
+//! - **Zero-allocation arithmetic**: All operations use stack-allocated arrays
+//! - **Mixed-size operations**: Add/multiply integers with different limb counts
+//! - **Modular arithmetic**: Built-in support for modular operations
+//! - **Extensive testing**: Comprehensive test suite including edge cases
+//! 
+//! ## Examples
+//! 
+//! ```rust
+//! use bigint_rs::Uint;
+//! 
+//! // Create 256-bit integers (4 * 64 = 256 bits)
+//! let a = Uint::<4>::from_u64(0xFFFFFFFFFFFFFFFF);
+//! let b = Uint::<4>::from_u64(0x1000);
+//! 
+//! // Addition
+//! let sum = a.add(&b);
+//! 
+//! // Multiplication
+//! let product = a.mul(&b);
+//! 
+//! // Mixed-size operations (larger on left)
+//! let large = Uint::<8>::from_u64(1000);  // 512-bit
+//! let small = Uint::<2>::from_u64(2000);  // 128-bit
+//! let result = large.add(&small);         // Returns 512-bit result
+//! ```
+//! 
+//! ## Performance
+//! 
+//! This library is designed for high-performance applications where predictable
+//! memory usage and minimal allocation overhead are critical. See the benchmark
+//! results in the repository for detailed performance comparisons.
 
-impl<const LIMBS: usize> Uint<LIMBS> {
-    pub fn zero() -> Self {
-        Self { limbs: [0; LIMBS] }
-    }
+pub mod uint;
 
-    pub fn from_u64(x: u64) -> Self {
-        let mut limbs = [0; LIMBS];
-        limbs[0] = x;
-        Self { limbs }
-    }
+pub use uint::Uint;
 
-    /// Simple addition without modular arithmetic
-    pub fn add(&self, other: &Self) -> Self {
-        let mut out = [0u64; LIMBS];
-        let mut carry = false;
+/// Type alias for 64-bit unsigned integer (1 limb)
+pub type U64 = Uint<1>;
 
-        for i in 0..LIMBS {
-            let (s1, c1) = self.limbs[i].overflowing_add(other.limbs[i]);
-            let (s2, c2) = s1.overflowing_add(carry as u64);
+/// Type alias for 128-bit unsigned integer (2 limbs)
+pub type U128 = Uint<2>;
 
-            out[i] = s2;
-            carry = c1 || c2;
-        }
+/// Type alias for 256-bit unsigned integer (4 limbs)
+pub type U256 = Uint<4>;
 
-        Self { limbs: out }
-    }
+/// Type alias for 512-bit unsigned integer (8 limbs)
+pub type U512 = Uint<8>;
 
-    /// Simple multiplication without modular arithmetic
-    pub fn mul(&self, other: &Self) -> Self {
-        let mut out = [0u64; LIMBS];
-
-        for i in 0..LIMBS {
-            let mut carry: u128 = 0;
-            for j in 0..LIMBS {
-                if i + j >= LIMBS { break; }
-                
-                let a = self.limbs[i] as u128;
-                let b = other.limbs[j] as u128;
-                let sum = out[i + j] as u128 + a * b + carry;
-                out[i + j] = sum as u64;
-                carry = sum >> 64;
-            }
-        }
-
-        Self { limbs: out }
-    }
-
-     /// (a + b) mod 2^bitsize
-    pub fn addmod_bits(&self, other: &Self, bitsize: usize) -> Self {
-        assert!(bitsize <= LIMBS * 64);
-
-        let mut out = [0u64; LIMBS];
-        let mut carry = false;
-
-        for i in 0..LIMBS {
-            let (s1, c1) = self.limbs[i].overflowing_add(other.limbs[i]);
-            let (s2, c2) = s1.overflowing_add(carry as u64);
-
-            out[i] = s2;
-            carry = c1 || c2;
-        }
-
-        // 最後の limb にビットマスクをかける
-        let excess_bits = LIMBS * 64 - bitsize;
-        if excess_bits > 0 {
-            let mask = u64::MAX >> excess_bits;
-            let last = (bitsize - 1) / 64;
-            out[last] &= mask;
-
-            // さらに上位 limb をゼロに
-            for i in last + 1..LIMBS {
-                out[i] = 0;
-            }
-        }
-
-        Self { limbs: out }
-    }
-     pub fn mulmod_bits(&self, other: &Self, bitsize: usize) -> Self {
-        assert!(bitsize <= LIMBS * 64);
-
-        let nlimbs = (bitsize + 63) / 64;
-        let mut out = [0u64; LIMBS];
-
-        for i in 0..nlimbs {
-            let mut carry: u128 = 0;
-            for j in 0..=i {
-                let a = self.limbs[j] as u128;
-                let b = other.limbs[i - j] as u128;
-                let sum = out[i] as u128 + a * b + carry;
-                out[i] = sum as u64;
-                carry = sum >> 64;
-            }
-            // もし carry が残っても、mod 2^(nlimbs*64) なので out[i+1] に繰り上げしなくていい
-        }
-
-        // 最後の limb を bitsize に合わせてマスク
-        let excess_bits = nlimbs * 64 - bitsize;
-        if excess_bits > 0 {
-            let mask: u64 = u64::MAX >> excess_bits;
-            out[nlimbs - 1] &= mask;
-        }
-        // 上位 limb はゼロに
-        for i in nlimbs..LIMBS {
-            out[i] = 0;
-        }
-
-        Self { limbs: out }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_basic_addition() {
-        let a = Uint::<4>::from_u64(0x1234_5678_9ABC_DEF0);
-        let b = Uint::<4>::from_u64(0x0FED_CBA9_8765_4321);
-        let result = a.add(&b);
-        
-        // 0x1234_5678_9ABC_DEF0 + 0x0FED_CBA9_8765_4321 = 0x2222_2222_2222_2211
-        assert_eq!(result.limbs[0], 0x2222_2222_2222_2211);
-        assert_eq!(result.limbs[1], 0);
-    }
-
-    #[test]
-    fn test_addition_with_carry() {
-        let a = Uint::<4>::from_u64(u64::MAX);
-        let b = Uint::<4>::from_u64(1);
-        let result = a.add(&b);
-        
-        // u64::MAX + 1 should overflow to next limb
-        assert_eq!(result.limbs[0], 0);
-        assert_eq!(result.limbs[1], 1);
-    }
-
-    #[test]
-    fn test_basic_multiplication() {
-        let a = Uint::<4>::from_u64(0x1000);
-        let b = Uint::<4>::from_u64(0x2000);
-        let result = a.mul(&b);
-        
-        // 0x1000 * 0x2000 = 0x2000000
-        assert_eq!(result.limbs[0], 0x2000000);
-        assert_eq!(result.limbs[1], 0);
-    }
-
-    #[test]
-    fn test_multiplication_large() {
-        let a = Uint::<4>::from_u64(0xFFFF_FFFF);
-        let b = Uint::<4>::from_u64(0xFFFF_FFFF);
-        let result = a.mul(&b);
-        
-        // 0xFFFF_FFFF * 0xFFFF_FFFF = 0xFFFFFFFE00000001
-        assert_eq!(result.limbs[0], 0xFFFFFFFE00000001);
-        assert_eq!(result.limbs[1], 0);
-    }
-
-    #[test]
-    fn test_zero() {
-        let zero = Uint::<4>::zero();
-        let a = Uint::<4>::from_u64(42);
-        
-        let add_result = a.add(&zero);
-        let mul_result = a.mul(&zero);
-        
-        assert_eq!(add_result.limbs[0], 42);
-        assert_eq!(mul_result.limbs[0], 0);
-    }
-
-    #[test]
-    fn test_different_limb_sizes() {
-        // Test with 1 limb (64-bit)
-        let a1 = Uint::<1>::from_u64(100);
-        let b1 = Uint::<1>::from_u64(200);
-        let result1 = a1.add(&b1);
-        assert_eq!(result1.limbs[0], 300);
-
-        // Test with 8 limbs (512-bit)
-        let a8 = Uint::<8>::from_u64(100);
-        let b8 = Uint::<8>::from_u64(200);
-        let result8 = a8.add(&b8);
-        assert_eq!(result8.limbs[0], 300);
-        for i in 1..8 {
-            assert_eq!(result8.limbs[i], 0);
-        }
-    }
-}
+/// Type alias for 1024-bit unsigned integer (16 limbs)
+pub type U1024 = Uint<16>;
