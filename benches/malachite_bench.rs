@@ -1,7 +1,26 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use malachite::Natural;
 
 mod common;
 use common::*;
+
+// malachite specific test data creation function
+fn create_malachite_natural(bits: usize) -> Natural {
+    let bytes = bits / 8;
+    let mut data = vec![0u8; bytes];
+    for (i, byte) in data.iter_mut().enumerate() {
+        *byte = (i * 7 + 123) as u8;
+    }
+    Natural::from_limbs_asc(&data.chunks(8)
+        .map(|chunk| {
+            let mut limb = 0u64;
+            for (i, &byte) in chunk.iter().enumerate() {
+                limb |= (byte as u64) << (i * 8);
+            }
+            limb
+        })
+        .collect::<Vec<u64>>())
+}
 
 fn bench_malachite_addition(c: &mut Criterion) {
     let mut group = setup_benchmark_group("Malachite Addition", c);

@@ -1,7 +1,18 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use num_bigint::BigUint;
 
 mod common;
 use common::*;
+
+// num-bigint specific test data creation function
+fn create_biguint(bits: usize) -> BigUint {
+    let bytes = bits / 8;
+    let mut data = vec![0u8; bytes];
+    for (i, byte) in data.iter_mut().enumerate() {
+        *byte = (i * 7 + 123) as u8;
+    }
+    BigUint::from_bytes_le(&data)
+}
 
 fn bench_num_bigint_addition(c: &mut Criterion) {
     let mut group = setup_benchmark_group("num-bigint Addition", c);

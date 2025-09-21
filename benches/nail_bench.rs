@@ -1,7 +1,45 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use nail::Uint;
 
 mod common;
 use common::*;
+
+// Nail-specific test data creation functions
+fn create_fixed_array_uint_64() -> Uint<1> {
+    Uint::<1>::from_u64(0x123456789ABCDEF0u64)
+}
+
+fn create_fixed_array_uint_128() -> Uint<2> {
+    let mut uint = Uint::<2>::zero();
+    uint.limbs[0] = 0x123456789ABCDEF0u64;
+    uint.limbs[1] = 0x123456789ABCDEF0u64;
+    uint
+}
+
+fn create_fixed_array_uint_256() -> Uint<4> {
+    let mut uint = Uint::<4>::zero();
+    uint.limbs[0] = 0x123456789ABCDEF0u64;
+    uint.limbs[1] = 0x123456789ABCDEF0u64;
+    uint.limbs[2] = 0x123456789ABCDEF0u64;
+    uint.limbs[3] = 0x123456789ABCDEF0u64;
+    uint
+}
+
+fn create_fixed_array_uint_512() -> Uint<8> {
+    let mut uint = Uint::<8>::zero();
+    for i in 0..8 {
+        uint.limbs[i] = 0x123456789ABCDEF0u64;
+    }
+    uint
+}
+
+fn create_fixed_array_uint_1024() -> Uint<16> {
+    let mut uint = Uint::<16>::zero();
+    for i in 0..16 {
+        uint.limbs[i] = 0x123456789ABCDEF0u64;
+    }
+    uint
+}
 
 fn bench_nail_addition(c: &mut Criterion) {
     let mut group = setup_benchmark_group("Nail Addition", c);

@@ -1,7 +1,18 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
+use rug::Integer;
 
 mod common;
 use common::*;
+
+// rug specific test data creation function
+fn create_rug_integer(bits: usize) -> Integer {
+    let bytes = bits / 8;
+    let mut data = vec![0u8; bytes];
+    for (i, byte) in data.iter_mut().enumerate() {
+        *byte = (i * 7 + 123) as u8;
+    }
+    Integer::from_digits(&data, rug::integer::Order::Lsf)
+}
 
 fn bench_rug_addition(c: &mut Criterion) {
     let mut group = setup_benchmark_group("Rug-GMP Addition", c);
