@@ -68,33 +68,42 @@ fn create_fixed_array_uint_256() -> Uint<4> {
 }
 
 fn bench_primitive_addition(c: &mut Criterion) {
-    let mut group = c.benchmark_group("Primitive Addition");
+    let mut group = c.benchmark_group("Performance");
     
     let u64_a = create_test_u64();
     let u64_b = create_test_u64();
     let u128_a = create_test_u128();
     let u128_b = create_test_u128();
     
-    group.bench_function("u64", |b| {
-        b.iter(|| {
-            let result = black_box(u64_a).wrapping_add(black_box(u64_b));
-            black_box(result)
-        })
-    });
+    group.bench_with_input(
+        BenchmarkId::new("Addition", "u64"),
+        &64,
+        |b, _| {
+            b.iter(|| {
+                let result = black_box(u64_a).wrapping_add(black_box(u64_b));
+                black_box(result)
+            })
+        },
+    );
     
-    group.bench_function("u128", |b| {
-        b.iter(|| {
-            let result = black_box(u128_a).wrapping_add(black_box(u128_b));
-            black_box(result)
-        })
-    });
+    group.bench_with_input(
+        BenchmarkId::new("Addition", "u128"),
+        &128,
+        |b, _| {
+            b.iter(|| {
+                let result = black_box(u128_a).wrapping_add(black_box(u128_b));
+                black_box(result)
+            })
+        },
+    );
     
     group.finish();
 }
 
 fn bench_addition_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("Addition Comparison");
-    group.plot_config(PlotConfiguration::default().summary_scale(AxisScale::Logarithmic));
+    group.plot_config(PlotConfiguration::default()
+        .summary_scale(AxisScale::Logarithmic));
     
     for bits in [64, 128, 256].iter() {
         let bigint_a = create_biguint(*bits);
@@ -212,33 +221,42 @@ fn bench_addition_comparison(c: &mut Criterion) {
 }
 
 fn bench_primitive_multiplication(c: &mut Criterion) {
-    let mut group = c.benchmark_group("Primitive Multiplication");
+    let mut group = c.benchmark_group("Performance");
     
     let u64_a = create_test_u64();
     let u64_b = create_test_u64();
     let u128_a = create_test_u128();
     let u128_b = create_test_u128();
     
-    group.bench_function("u64", |b| {
-        b.iter(|| {
-            let result = black_box(u64_a).wrapping_mul(black_box(u64_b));
-            black_box(result)
-        })
-    });
+    group.bench_with_input(
+        BenchmarkId::new("Multiplication", "u64"),
+        &64,
+        |b, _| {
+            b.iter(|| {
+                let result = black_box(u64_a).wrapping_mul(black_box(u64_b));
+                black_box(result)
+            })
+        },
+    );
     
-    group.bench_function("u128", |b| {
-        b.iter(|| {
-            let result = black_box(u128_a).wrapping_mul(black_box(u128_b));
-            black_box(result)
-        })
-    });
+    group.bench_with_input(
+        BenchmarkId::new("Multiplication", "u128"),
+        &128,
+        |b, _| {
+            b.iter(|| {
+                let result = black_box(u128_a).wrapping_mul(black_box(u128_b));
+                black_box(result)
+            })
+        },
+    );
     
     group.finish();
 }
 
 fn bench_multiplication_comparison(c: &mut Criterion) {
     let mut group = c.benchmark_group("Multiplication Comparison");
-    group.plot_config(PlotConfiguration::default().summary_scale(AxisScale::Logarithmic));
+    group.plot_config(PlotConfiguration::default()
+        .summary_scale(AxisScale::Logarithmic));
     
     for bits in [64, 128, 256].iter() {
         let bigint_a = create_biguint(*bits);
@@ -357,7 +375,8 @@ fn bench_multiplication_comparison(c: &mut Criterion) {
 
 fn bench_bigint_scaling(c: &mut Criterion) {
     let mut group = c.benchmark_group("BigInt Scaling");
-    group.plot_config(PlotConfiguration::default().summary_scale(AxisScale::Logarithmic));
+    group.plot_config(PlotConfiguration::default()
+        .summary_scale(AxisScale::Logarithmic));
     
     for bits in [64, 128, 256].iter() {
         let bigint_a = create_biguint(*bits);
