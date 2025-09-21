@@ -1,12 +1,12 @@
 [package]
-name = "bigint-rs"
+name = "nail"
 version = "0.1.0"
 edition = "2021"
 authors = ["Your Name <your.email@example.com>"]
 description = "High-performance fixed-size big integer library with configurable limb count"
-documentation = "https://docs.rs/bigint-rs"
-homepage = "https://github.com/your-username/bigint-rs"
-repository = "https://github.com/your-username/bigint-rs"
+documentation = "https://docs.rs/nail"
+homepage = "https://github.com/your-username/nail"
+repository = "https://github.com/your-username/nail"
 license = "MIT OR Apache-2.0"
 keywords = ["bigint", "arithmetic", "cryptography", "mathematics", "performance"]
 categories = ["algorithms", "mathematics", "no-std"]
@@ -38,7 +38,7 @@ malachite = "0.4"
 
 
 [[bench]]
-name = "bigint_rs_bench"
+name = "nail_bench"
 harness = false
 
 [[bench]]

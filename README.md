@@ -1,11 +1,11 @@
-# BigInt-RS
+# Nail
 
-[![Rust](https://github.com/your-username/bigint-rs/workflows/CI/badge.svg)](https://github.com/your-username/bigint-rs/actions)
-[![Crates.io](https://img.shields.io/crates/v/bigint-rs.svg)](https://crates.io/crates/bigint-rs)
-[![Documentation](https://docs.rs/bigint-rs/badge.svg)](https://docs.rs/bigint-rs)
-[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/your-username/bigint-rs#license)
+[![Rust](https://github.com/your-username/nail/workflows/CI/badge.svg)](https://github.com/your-username/nail/actions)
+[![Crates.io](https://img.shields.io/crates/v/nail.svg)](https://crates.io/crates/nail)
+[![Documentation](https://docs.rs/nail/badge.svg)](https://docs.rs/nail)
+[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/your-username/nail#license)
 
-A high-performance **fixed-size** big integer library for Rust with configurable limb count. Unlike dynamic big integer libraries, `bigint-rs` uses compile-time sized arrays for predictable memory usage and optimal performance.
+A high-performance **fixed-size** big integer library for Rust with configurable limb count. Unlike dynamic big integer libraries, `nail` uses compile-time sized arrays for predictable memory usage and optimal performance.
 
 ## ✨ Features
 
@@ -24,7 +24,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-bigint-rs = "0.1.0"
+nail = "0.1.0"
 ```
 
 ## 📝 Basic Usage
@@ -201,8 +201,8 @@ Typical performance on modern hardware (times are approximate):
 ### Building from Source
 
 ```bash
-git clone https://github.com/your-username/bigint-rs.git
-cd bigint-rs
+git clone https://github.com/your-username/nail.git
+cd nail
 cargo build --release
 ```
 
@@ -234,7 +234,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 ## 📚 Documentation
 
-- [API Documentation](https://docs.rs/bigint-rs)
+- [API Documentation](https://docs.rs/nail)
 - [Examples](./examples/)
 - [Benchmark Results](./BENCHMARK_RESULTS.md)
 

@@ -1,4 +1,4 @@
-use bigint_rs::{U64, U128, U256, U512, U1024};
+use nail::{U64, U128, U256, U512, U1024};
 use std::time::Instant;
 
 fn benchmark_operation<F>(name: &str, iterations: usize, mut op: F) 
@@ -15,7 +15,7 @@ where
 }
 
 fn main() {
-    println!("=== Performance Demonstration ===\n");
+    println!("=== Nail Performance Demonstration ===\n");
     
     let iterations = 1_000_000;
     

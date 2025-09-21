@@ -1,4 +1,4 @@
-use bigint_rs::{U256, U512};
+use nail::{U256, U512};
 
 fn main() {
     println!("=== Cryptographic Operations Example ===\n");

@@ -49,13 +49,13 @@ fn bench_all_libraries_addition(c: &mut Criterion) {
             },
         );
         
-        // bigint-rs
+        // nail
         match bits {
             64 => {
                 let a = create_fixed_array_uint_64();
                 let b = create_fixed_array_uint_64();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -69,7 +69,7 @@ fn bench_all_libraries_addition(c: &mut Criterion) {
                 let a = create_fixed_array_uint_128();
                 let b = create_fixed_array_uint_128();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -83,7 +83,7 @@ fn bench_all_libraries_addition(c: &mut Criterion) {
                 let a = create_fixed_array_uint_256();
                 let b = create_fixed_array_uint_256();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -175,13 +175,13 @@ fn bench_all_libraries_multiplication(c: &mut Criterion) {
             },
         );
         
-        // bigint-rs
+        // nail
         match bits {
             64 => {
                 let a = create_fixed_array_uint_64();
                 let b = create_fixed_array_uint_64();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -195,7 +195,7 @@ fn bench_all_libraries_multiplication(c: &mut Criterion) {
                 let a = create_fixed_array_uint_128();
                 let b = create_fixed_array_uint_128();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -209,7 +209,7 @@ fn bench_all_libraries_multiplication(c: &mut Criterion) {
                 let a = create_fixed_array_uint_256();
                 let b = create_fixed_array_uint_256();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {

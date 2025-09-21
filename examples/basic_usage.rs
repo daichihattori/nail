@@ -1,7 +1,7 @@
-use bigint_rs::{U64, U128, U256, U512, U1024};
+use nail::{U64, U128, U256, U512, U1024};
 
 fn main() {
-    println!("=== BigInt-RS Examples ===\n");
+    println!("=== Nail Examples ===\n");
 
     // Basic creation and arithmetic
     println!("1. Basic Operations:");

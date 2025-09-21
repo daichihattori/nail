@@ -1,7 +1,7 @@
 use num_bigint::BigUint;
 use rug::Integer;
 use malachite::Natural;
-use bigint_rs::Uint;
+use nail::Uint;
 
 pub fn create_biguint(bits: usize) -> BigUint {
     let bytes = bits / 8;

@@ -48,16 +48,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7b7e4c2464d97fe331d41de9d5db0def0a96f4d823b8b32a2efd503578988973"
 
 [[package]]
-name = "bigint-rs"
-version = "0.1.0"
-dependencies = [
- "criterion",
- "malachite",
- "num-bigint",
- "rug",
-]
-
-[[package]]
 name = "bumpalo"
 version = "3.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -348,6 +338,16 @@ name = "memchr"
 version = "2.7.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32a282da65faaf38286cf3be983213fcf1d2e2a58700e808f83f4ea9a4804bc0"
+
+[[package]]
+name = "nail"
+version = "0.1.0"
+dependencies = [
+ "criterion",
+ "malachite",
+ "num-bigint",
+ "rug",
+]
 
 [[package]]
 name = "num-bigint"

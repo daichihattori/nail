@@ -1,9 +1,9 @@
-//! # BigInt-RS
+//! # Nail
 //! 
 //! A high-performance fixed-size big integer library for Rust with configurable limb count.
 //! 
 //! This library provides compile-time sized unsigned integers with efficient arithmetic operations.
-//! Unlike dynamic big integer libraries, `bigint-rs` uses fixed-size arrays for predictable
+//! Unlike dynamic big integer libraries, `nail` uses fixed-size arrays for predictable
 //! memory usage and optimal performance.
 //! 
 //! ## Features
@@ -17,7 +17,7 @@
 //! ## Examples
 //! 
 //! ```rust
-//! use bigint_rs::Uint;
+//! use nail::Uint;
 //! 
 //! // Create 256-bit integers (4 * 64 = 256 bits)
 //! let a = Uint::<4>::from_u64(0xFFFFFFFFFFFFFFFF);

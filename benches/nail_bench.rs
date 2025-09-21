@@ -3,8 +3,8 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion, Benchmark
 mod common;
 use common::*;
 
-fn bench_bigint_rs_addition(c: &mut Criterion) {
-    let mut group = setup_benchmark_group("BigInt-RS Addition", c);
+fn bench_nail_addition(c: &mut Criterion) {
+    let mut group = setup_benchmark_group("Nail Addition", c);
     
     for bits in get_extended_bit_sizes() {
         match bits {
@@ -12,7 +12,7 @@ fn bench_bigint_rs_addition(c: &mut Criterion) {
                 let a = create_fixed_array_uint_64();
                 let b = create_fixed_array_uint_64();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -26,7 +26,7 @@ fn bench_bigint_rs_addition(c: &mut Criterion) {
                 let a = create_fixed_array_uint_128();
                 let b = create_fixed_array_uint_128();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -40,7 +40,7 @@ fn bench_bigint_rs_addition(c: &mut Criterion) {
                 let a = create_fixed_array_uint_256();
                 let b = create_fixed_array_uint_256();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -54,7 +54,7 @@ fn bench_bigint_rs_addition(c: &mut Criterion) {
                 let a = create_fixed_array_uint_512();
                 let b = create_fixed_array_uint_512();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -68,7 +68,7 @@ fn bench_bigint_rs_addition(c: &mut Criterion) {
                 let a = create_fixed_array_uint_1024();
                 let b = create_fixed_array_uint_1024();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -84,8 +84,8 @@ fn bench_bigint_rs_addition(c: &mut Criterion) {
     group.finish();
 }
 
-fn bench_bigint_rs_multiplication(c: &mut Criterion) {
-    let mut group = setup_benchmark_group("BigInt-RS Multiplication", c);
+fn bench_nail_multiplication(c: &mut Criterion) {
+    let mut group = setup_benchmark_group("Nail Multiplication", c);
     
     for bits in get_extended_bit_sizes() {
         match bits {
@@ -93,7 +93,7 @@ fn bench_bigint_rs_multiplication(c: &mut Criterion) {
                 let a = create_fixed_array_uint_64();
                 let b = create_fixed_array_uint_64();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -107,7 +107,7 @@ fn bench_bigint_rs_multiplication(c: &mut Criterion) {
                 let a = create_fixed_array_uint_128();
                 let b = create_fixed_array_uint_128();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -121,7 +121,7 @@ fn bench_bigint_rs_multiplication(c: &mut Criterion) {
                 let a = create_fixed_array_uint_256();
                 let b = create_fixed_array_uint_256();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -135,7 +135,7 @@ fn bench_bigint_rs_multiplication(c: &mut Criterion) {
                 let a = create_fixed_array_uint_512();
                 let b = create_fixed_array_uint_512();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -149,7 +149,7 @@ fn bench_bigint_rs_multiplication(c: &mut Criterion) {
                 let a = create_fixed_array_uint_1024();
                 let b = create_fixed_array_uint_1024();
                 group.bench_with_input(
-                    BenchmarkId::new("bigint-rs", bits),
+                    BenchmarkId::new("nail", bits),
                     &bits,
                     |bench, _| {
                         bench.iter(|| {
@@ -165,8 +165,8 @@ fn bench_bigint_rs_multiplication(c: &mut Criterion) {
     group.finish();
 }
 
-fn bench_bigint_rs_modular(c: &mut Criterion) {
-    let mut group = setup_benchmark_group("BigInt-RS Modular", c);
+fn bench_nail_modular(c: &mut Criterion) {
+    let mut group = setup_benchmark_group("Nail Modular", c);
     
     for bits in get_test_bit_sizes() {
         match bits {
@@ -250,8 +250,8 @@ fn bench_bigint_rs_modular(c: &mut Criterion) {
 
 criterion_group!(
     benches,
-    bench_bigint_rs_addition,
-    bench_bigint_rs_multiplication,
-    bench_bigint_rs_modular
+    bench_nail_addition,
+    bench_nail_multiplication,
+    bench_nail_modular
 );
 criterion_main!(benches);
