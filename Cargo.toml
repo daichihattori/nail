@@ -22,6 +22,7 @@ debug-assertions = false
 num-bigint = "0.4"
 criterion = "0.5"
 rug = "1.24"
+malachite = "0.4"
 
 [[bench]]
 name = "bigint_bench"
