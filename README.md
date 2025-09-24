@@ -1,9 +1,9 @@
 # Nail
 
-[![Rust](https://github.com/your-username/nail/workflows/CI/badge.svg)](https://github.com/your-username/nail/actions)
+[![Rust](https://github.com/daichihattori/nail/workflows/CI/badge.svg)](https://github.com/daichihattori/nail/actions)
 [![Crates.io](https://img.shields.io/crates/v/nail.svg)](https://crates.io/crates/nail)
 [![Documentation](https://docs.rs/nail/badge.svg)](https://docs.rs/nail)
-[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/your-username/nail#license)
+[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](https://github.com/daichihattori/nail#license)
 
 A high-performance **fixed-size** big integer library for Rust with configurable limb count. Unlike dynamic big integer libraries, `nail` uses compile-time sized arrays for predictable memory usage and optimal performance.
 
@@ -198,7 +198,7 @@ Typical performance on modern hardware (times are approximate):
 ### Building from Source
 
 ```bash
-git clone https://github.com/your-username/nail.git
+git clone https://github.com/daichihattori/nail.git
 cd nail
 cargo build --release
 ```
