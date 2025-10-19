@@ -248,7 +248,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 | Library | 64-bit | 128-bit | 256-bit | 512-bit | 1024-bit |
 |---------|---------|---------|---------|---------|---------|
-| **malachite** | 14 ns | 44 ns | 23 ns | - | - |
+| **malachite** | 14 ns | 45 ns | 23 ns | - | - |
 | **nail** | 1 ns | 2 ns | 3 ns | 7 ns | 19 ns |
 | **num-bigint** | 43 ns | 44 ns | 23 ns | - | - |
 | **rug-gmp** | 2 ns | 2 ns | 2 ns | - | - |
@@ -265,9 +265,9 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 | Library | 64-bit | 128-bit | 256-bit | 512-bit | 1024-bit |
 |---------|---------|---------|---------|---------|---------|
-| **malachite** | 14 ns | 38 ns | 49 ns | - | - |
+| **malachite** | 15 ns | 38 ns | 49 ns | - | - |
 | **nail** | 1 ns | 2 ns | 6 ns | 38 ns | 192 ns |
-| **num-bigint** | 45 ns | 36 ns | 52 ns | - | - |
+| **num-bigint** | 45 ns | 37 ns | 53 ns | - | - |
 | **rug-gmp** | 2 ns | 2 ns | 2 ns | - | - |
 
 ### Multiplication Performance Summary
