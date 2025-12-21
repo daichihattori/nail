@@ -266,8 +266,8 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 | Library | 64-bit | 128-bit | 256-bit | 512-bit | 1024-bit |
 |---------|---------|---------|---------|---------|---------|
 | **malachite** | 15 ns | 37 ns | 48 ns | - | - |
-| **nail** | 1 ns | 2 ns | 6 ns | 38 ns | 222 ns |
-| **num-bigint** | 43 ns | 37 ns | 53 ns | - | - |
+| **nail** | 1 ns | 2 ns | 6 ns | 38 ns | 192 ns |
+| **num-bigint** | 42 ns | 37 ns | 53 ns | - | - |
 | **rug-gmp** | 2 ns | 2 ns | 2 ns | - | - |
 
 ### Multiplication Performance Summary
@@ -276,7 +276,7 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - **128-bit**: Fastest is **rug-gmp** (2 ns)
 - **256-bit**: Fastest is **rug-gmp** (2 ns)
 - **512-bit**: Fastest is **nail** (38 ns)
-- **1024-bit**: Fastest is **nail** (222 ns)
+- **1024-bit**: Fastest is **nail** (192 ns)
 
 
 <!-- BENCHMARK_RESULTS_END -->
