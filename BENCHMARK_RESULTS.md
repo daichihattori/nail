@@ -6,9 +6,9 @@
 
 | Library | 64-bit | 128-bit | 256-bit | 512-bit | 1024-bit |
 |---------|---------|---------|---------|---------|---------|
-| **malachite** | 12 ns | 40 ns | 22 ns | - | - |
-| **nail** | 1 ns | 2 ns | 4 ns | 7 ns | 15 ns |
-| **num-bigint** | 40 ns | 41 ns | 21 ns | - | - |
+| **malachite** | 14 ns | 44 ns | 26 ns | - | - |
+| **nail** | 1 ns | 2 ns | 3 ns | 7 ns | 18 ns |
+| **num-bigint** | 45 ns | 45 ns | 24 ns | - | - |
 | **rug-gmp** | 2 ns | 2 ns | 2 ns | - | - |
 
 ### Addition Performance Summary
@@ -17,15 +17,15 @@
 - **128-bit**: Fastest is **rug-gmp** (2 ns)
 - **256-bit**: Fastest is **rug-gmp** (2 ns)
 - **512-bit**: Fastest is **nail** (7 ns)
-- **1024-bit**: Fastest is **nail** (15 ns)
+- **1024-bit**: Fastest is **nail** (18 ns)
 
 ## Multiplication Performance
 
 | Library | 64-bit | 128-bit | 256-bit | 512-bit | 1024-bit |
 |---------|---------|---------|---------|---------|---------|
-| **malachite** | 13 ns | 33 ns | 44 ns | - | - |
-| **nail** | 1 ns | 2 ns | 6 ns | 38 ns | 172 ns |
-| **num-bigint** | 37 ns | 34 ns | 47 ns | - | - |
+| **malachite** | 15 ns | 37 ns | 48 ns | - | - |
+| **nail** | 1 ns | 2 ns | 6 ns | 38 ns | 191 ns |
+| **num-bigint** | 44 ns | 38 ns | 56 ns | - | - |
 | **rug-gmp** | 2 ns | 2 ns | 2 ns | - | - |
 
 ### Multiplication Performance Summary
@@ -34,6 +34,6 @@
 - **128-bit**: Fastest is **rug-gmp** (2 ns)
 - **256-bit**: Fastest is **rug-gmp** (2 ns)
 - **512-bit**: Fastest is **nail** (38 ns)
-- **1024-bit**: Fastest is **nail** (172 ns)
+- **1024-bit**: Fastest is **nail** (191 ns)
 
 
