@@ -248,35 +248,35 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 
 | Library | 64-bit | 128-bit | 256-bit | 512-bit | 1024-bit |
 |---------|---------|---------|---------|---------|---------|
-| **malachite** | 14 ns | 43 ns | 23 ns | - | - |
-| **nail** | 1 ns | 2 ns | 4 ns | 7 ns | 16 ns |
-| **num-bigint** | 44 ns | 44 ns | 24 ns | - | - |
-| **rug-gmp** | 2 ns | 2 ns | 2 ns | - | - |
+| **malachite** | 7 ns | 26 ns | 19 ns | - | - |
+| **nail** | 1 ns | 1 ns | 2 ns | 4 ns | 9 ns |
+| **num-bigint** | 27 ns | 27 ns | 17 ns | - | - |
+| **rug-gmp** | 1 ns | 1 ns | 1 ns | - | - |
 
 ### Addition Performance Summary
 
 - **64-bit**: Fastest is **nail** (1 ns)
-- **128-bit**: Fastest is **rug-gmp** (2 ns)
-- **256-bit**: Fastest is **rug-gmp** (2 ns)
-- **512-bit**: Fastest is **nail** (7 ns)
-- **1024-bit**: Fastest is **nail** (16 ns)
+- **128-bit**: Fastest is **rug-gmp** (1 ns)
+- **256-bit**: Fastest is **rug-gmp** (1 ns)
+- **512-bit**: Fastest is **nail** (4 ns)
+- **1024-bit**: Fastest is **nail** (9 ns)
 
 ## Multiplication Performance
 
 | Library | 64-bit | 128-bit | 256-bit | 512-bit | 1024-bit |
 |---------|---------|---------|---------|---------|---------|
-| **malachite** | 15 ns | 37 ns | 49 ns | - | - |
-| **nail** | 1 ns | 2 ns | 6 ns | 40 ns | 190 ns |
-| **num-bigint** | 42 ns | 38 ns | 54 ns | - | - |
-| **rug-gmp** | 2 ns | 2 ns | 2 ns | - | - |
+| **malachite** | 7 ns | 20 ns | 26 ns | - | - |
+| **nail** | 1 ns | 1 ns | 3 ns | 16 ns | 81 ns |
+| **num-bigint** | 25 ns | 22 ns | 30 ns | - | - |
+| **rug-gmp** | 1 ns | 1 ns | 1 ns | - | - |
 
 ### Multiplication Performance Summary
 
 - **64-bit**: Fastest is **nail** (1 ns)
-- **128-bit**: Fastest is **rug-gmp** (2 ns)
-- **256-bit**: Fastest is **rug-gmp** (2 ns)
-- **512-bit**: Fastest is **nail** (40 ns)
-- **1024-bit**: Fastest is **nail** (190 ns)
+- **128-bit**: Fastest is **rug-gmp** (1 ns)
+- **256-bit**: Fastest is **rug-gmp** (1 ns)
+- **512-bit**: Fastest is **nail** (16 ns)
+- **1024-bit**: Fastest is **nail** (81 ns)
 
 
 <!-- BENCHMARK_RESULTS_END -->
